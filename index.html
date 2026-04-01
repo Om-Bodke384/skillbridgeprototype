@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillBridge — Student Opportunity Platform</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<!-- ── NAVIGATION ─────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="navigate('home')" style="cursor:pointer">
+      Skill<span>Bridge</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <button class="nav-link" data-page="home">Home</button>
+      <button class="nav-link" data-page="communities">Communities</button>
+      <button class="nav-link" data-page="internships">Internships</button>
+      <button class="nav-link" data-page="mentors">Mentors</button>
+      <button class="nav-link" data-page="leaderboard">Leaderboard</button>
+      <button class="nav-link" data-page="dashboard">Dashboard</button>
+      <button class="nav-cta" id="navAuthBtn" onclick="navigate('login')">Sign in</button>
+    </div>
+    <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">Student Opportunity Platform · GCOERC Nashik</div>
+    <h1 class="display display-xl">
+      Explore skills.<br>Join communities.<br><em>Build your future.</em>
+    </h1>
+    <p class="hero-sub">
+      One platform where students discover real tech domains, learn through structured paths,
+      connect with mentors, and work on real local opportunities.
+    </p>
+    <div class="hero-actions">
+      <button class="btn btn-teal btn-lg" onclick="navigate('signup')">Get started free</button>
+      <button class="btn btn-outline btn-lg" style="border-color:#3A3A36;color:#9A9890"
+        onclick="navigate('communities')">Explore domains</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-n" id="statDomains">—</div>
+        <div class="hero-stat-l">Tech domains</div>
+      </div>
+      <div>
+        <div class="hero-stat-n" id="statMentors">—</div>
+        <div class="hero-stat-l">Active mentors</div>
+      </div>
+      <div>
+        <div class="hero-stat-n" id="statJobs">—</div>
+        <div class="hero-stat-l">Live internships</div>
+      </div>
+      <div>
+        <div class="hero-stat-n" id="statStudents">—</div>
+        <div class="hero-stat-l">Students joined</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section" style="background:var(--bg-surface)">
+    <div class="container">
+      <div class="section-head text-center" style="max-width:600px;margin:0 auto 48px">
+        <div class="label mb-16">How it works</div>
+        <h2>From curious to capable — in four steps</h2>
+      </div>
+      <div class="grid-4">
+        <div class="card" style="text-align:center">
+          <div style="font-size:32px;margin-bottom:16px">🧭</div>
+          <h4>1. Choose a domain</h4>
+          <p class="text-sm text-secondary mt-8">Pick from nine real-world tech disciplines aligned with your interests and department.</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <div style="font-size:32px;margin-bottom:16px">🗺️</div>
+          <h4>2. Follow the path</h4>
+          <p class="text-sm text-secondary mt-8">Get a structured four-month roadmap with resources, weekly challenges, and milestones.</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <div style="font-size:32px;margin-bottom:16px">🤝</div>
+          <h4>3. Meet your mentor</h4>
+          <p class="text-sm text-secondary mt-8">Connect with industry professionals who review your work and guide your growth.</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <div style="font-size:32px;margin-bottom:16px">🚀</div>
+          <h4>4. Work on real projects</h4>
+          <p class="text-sm text-secondary mt-8">Apply skills on local business, NGO, and startup briefs — building a real portfolio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured domains -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="label mb-8">Featured domains</div>
+        <h2>Where do you want to grow?</h2>
+        <p>Each community has a structured learning path, weekly events, mentorship, and real project opportunities.</p>
+      </div>
+      <div class="grid-3" id="featuredDomains"></div>
+      <div class="mt-32 text-center">
+        <button class="btn btn-outline" onclick="navigate('communities')">View all communities →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local opportunities callout -->
+  <section class="section" style="background:var(--bg-dark);color:var(--text-inverse)">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+      <div>
+        <div class="label" style="color:#5DCAA5;margin-bottom:12px">Local Impact</div>
+        <h2 style="color:var(--text-inverse)">Real problems. Real practice. Real Nashik.</h2>
+        <p style="color:#6A6860;margin-top:16px;line-height:1.65">
+          Local SMEs, NGOs, and startups post project briefs on SkillBridge.
+          Students apply their skills to real client work — and walk away with
+          portfolio pieces that no classroom assignment can replace.
+        </p>
+        <button class="btn btn-teal mt-32" onclick="navigate('internships')">Browse opportunities</button>
+      </div>
+      <div id="localOppCards"></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" style="background:var(--bg-surface)">
+    <div class="container">
+      <div class="section-head text-center" style="max-width:500px;margin:0 auto 40px">
+        <div class="label mb-8">What students say</div>
+        <h2>Experiences that speak for themselves</h2>
+      </div>
+      <div class="grid-3" id="testimonials"></div>
+    </div>
+  </section>
+
+  <!-- CTA strip -->
+  <section class="section-sm" style="background:var(--accent-teal)">
+    <div class="container text-center">
+      <h2 style="color:#fff">Ready to start building?</h2>
+      <p style="color:rgba(255,255,255,0.75);margin-top:10px">Join for free. No credit card. No experience needed.</p>
+      <div class="flex gap-12 mt-24" style="justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-lg" style="background:#fff;color:var(--accent-teal)" onclick="navigate('signup')">Create your account</button>
+        <button class="btn btn-lg btn-outline" style="border-color:rgba(255,255,255,0.5);color:#fff" onclick="navigate('communities')">Browse communities</button>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: COMMUNITIES
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-communities">
+  <div class="container section">
+    <div class="section-head">
+      <div class="label mb-8">Domain communities</div>
+      <h2>All departments & communities</h2>
+      <p>Each community is tied to a real department and includes a skill path, events, mentors, and internships.</p>
+    </div>
+    <div class="tab-row" id="commDeptTabs"></div>
+    <div class="grid-auto" id="commGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: DOMAIN DETAIL
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-domaindetail">
+  <div class="container section">
+    <button class="back-link" onclick="navigate('communities')">← Back to communities</button>
+    <div class="card mb-24" id="detailHero"></div>
+    <div class="tab-row" id="detailSubTabs"></div>
+    <div id="subContent"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: INTERNSHIPS
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-internships">
+  <div class="container section">
+    <div class="section-head">
+      <div class="label mb-8">Opportunities</div>
+      <h2>Internships, projects & jobs</h2>
+      <p>Domain-specific opportunities from local businesses, NGOs, startups, and remote companies.</p>
+    </div>
+    <div class="tab-row" id="jobDeptTabs"></div>
+    <div class="grid-auto" id="jobGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: MENTORS
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-mentors">
+  <div class="container section">
+    <div class="section-head">
+      <div class="label mb-8">Guidance</div>
+      <h2>Your mentors</h2>
+      <p>Industry professionals who've been in your shoes — and are ready to guide you.</p>
+    </div>
+    <div class="tab-row" id="mentorDeptTabs"></div>
+    <div class="grid-auto" id="mentorGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: LEADERBOARD
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-leaderboard">
+  <div class="container section">
+    <div class="section-head">
+      <div class="label mb-8">Community rankings</div>
+      <h2>Leaderboard</h2>
+      <p>Points are earned by completing tasks, attending sessions, and finishing projects.</p>
+    </div>
+    <div class="tab-row" id="lbDeptTabs"></div>
+    <div class="lb-wrap">
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Student</th>
+            <th>Department</th>
+            <th>Top domain</th>
+            <th>Points</th>
+            <th style="min-width:140px">Progress</th>
+          </tr>
+        </thead>
+        <tbody id="lbBody">
+          <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--text-muted)">
+            Sign in to see the leaderboard
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: DASHBOARD
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-dashboard">
+  <div class="container section">
+    <div class="section-head">
+      <div class="label mb-8">Your space</div>
+      <h2 id="dashName">My dashboard</h2>
+      <p id="dashDept" class="text-muted"></p>
+    </div>
+    <div class="dash-stat-grid">
+      <div class="dash-stat-card">
+        <div class="dash-stat-n" id="dashJoinedCount">—</div>
+        <div class="dash-stat-l">Communities joined</div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-n">—</div>
+        <div class="dash-stat-l">Tasks completed</div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-n">—</div>
+        <div class="dash-stat-l">Projects live</div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dash-stat-n">—</div>
+        <div class="dash-stat-l">Points earned</div>
+      </div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-section-title">Domain progress</div>
+      <div id="dashDomains"><p class="text-sm text-muted">Join communities to track your progress here.</p></div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-section-title">Badges</div>
+      <p class="text-sm text-muted">Complete challenges and projects to earn badges.</p>
+    </div>
+    <div class="dash-section">
+      <div class="dash-section-title">Upcoming sessions</div>
+      <p class="text-sm text-muted">Your booked mentor sessions will appear here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: LOGIN
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h3 class="auth-title">Welcome back</h3>
+      <p class="auth-sub">Sign in to your SkillBridge account</p>
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="field">
+          <label>Email address</label>
+          <input type="email" id="loginEmail" placeholder="you@gcoerc.edu.in" required>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="loginPass" placeholder="Your password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">
+          Sign in
+        </button>
+      </form>
+      <p class="auth-switch mt-16">No account? <a onclick="navigate('signup')">Create one free</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: SIGNUP
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-signup">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h3 class="auth-title">Join SkillBridge</h3>
+      <p class="auth-sub">Free for all GCOERC students</p>
+      <form id="signupForm" onsubmit="handleSignup(event)">
+        <div class="field">
+          <label>Full name</label>
+          <input type="text" id="signupName" placeholder="Your full name" required>
+        </div>
+        <div class="field">
+          <label>College email</label>
+          <input type="email" id="signupEmail" placeholder="you@gcoerc.edu.in" required>
+        </div>
+        <div class="field">
+          <label>Department</label>
+          <select id="signupDept" required>
+            <option value="">Select your department</option>
+            <option>Computer Engineering</option>
+            <option>AI &amp; Data Science Engineering</option>
+            <option>Automation &amp; Robotics Engineering</option>
+            <option>Electrical Engineering</option>
+            <option>Mechanical Engineering</option>
+            <option>Civil Engineering</option>
+            <option>Management Studies</option>
+            <option>Basic Engineering Science</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Domains you're interested in <span style="color:var(--text-muted);font-weight:400">(pick any)</span></label>
+          <div class="domain-picker mt-8" id="domainPicker"></div>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="signupPass" placeholder="Choose a password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">
+          Create my account
+        </button>
+      </form>
+      <p class="auth-switch mt-16">Already a member? <a onclick="navigate('login')">Sign in</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ──────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Skill<span>Bridge</span></div>
+        <p class="footer-desc">A student opportunity platform built for GCOERC Nashik — connecting learners with domains, mentors, and real-world projects.</p>
+        <p style="font-size:12px">
+          <a href="mailto:techguru@ggsf.edu.in" class="footer-link">techguru@ggsf.edu.in</a>
+          <a href="tel:+918806664612" class="footer-link">+91 8806664612</a>
+        </p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <a class="footer-link" onclick="navigate('communities')">Communities</a>
+        <a class="footer-link" onclick="navigate('internships')">Internships</a>
+        <a class="footer-link" onclick="navigate('mentors')">Mentors</a>
+        <a class="footer-link" onclick="navigate('leaderboard')">Leaderboard</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Domains</div>
+        <a class="footer-link" onclick="openDomain('cybersecurity')">Cybersecurity</a>
+        <a class="footer-link" onclick="openDomain('aiml')">AI &amp; Machine Learning</a>
+        <a class="footer-link" onclick="openDomain('webdev')">Web Development</a>
+        <a class="footer-link" onclick="openDomain('uiux')">UI / UX Design</a>
+        <a class="footer-link" onclick="openDomain('cloud')">Cloud &amp; DevOps</a>
+      </div>
+      <div>
+        <div class="footer-col-title">College</div>
+        <a class="footer-link" href="https://www.gcoerc.ac.in" target="_blank">GCOERC Website</a>
+        <a class="footer-link" href="https://techgurugcoerc.in" target="_blank">TechGuru 2026</a>
+        <a class="footer-link" onclick="navigate('signup')">Register now</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkillBridge · Made with ♥ by the Coding Club, GCOERC</span>
+      <span>Prajwal Shete · Sarthak Paide · Ashutosh Bhagat</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── TOAST ───────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<!-- ── SCRIPTS ─────────────────────────────────────────── -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  /* ─── Home page dynamic content ──────────────────── */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Stats
+    $('statDomains').textContent  = DOMAINS.length;
+    $('statMentors').textContent  = MENTORS.length;
+    $('statJobs').textContent     = JOBS.length;
+    $('statStudents').textContent = '—'; // fetch from backend
+
+    // Featured domains (first 6)
+    $('featuredDomains').innerHTML = DOMAINS.slice(0, 6).map(d => {
+      const bg = ACCENT_BG[d.accentClass] || '#F0F0EC';
+      const tc = ACCENT_TC[d.accentClass] || '#2A2A27';
+      return `<div class="card" style="cursor:pointer" onclick="openDomain('${d.id}')">
+        <div class="flex-center gap-12 mb-12">
+          <div style="width:40px;height:40px;border-radius:10px;background:${bg};color:${tc};
+            display:flex;align-items:center;justify-content:center;font-size:20px">${d.icon}</div>
+          <div>
+            <div style="font-size:10px;color:var(--text-muted);font-weight:600;letter-spacing:0.05em">${d.department}</div>
+            <div style="font-weight:500">${d.name}</div>
+          </div>
+        </div>
+        <p class="text-sm text-secondary" style="line-height:1.55">${d.tagline}</p>
+      </div>`;
+    }).join('');
+
+    // Local opportunities preview
+    $('localOppCards').innerHTML = JOBS.slice(0, 3).map(j => {
+      const dom = DOMAINS.find(d => d.id === j.domain) || {};
+      const bg  = ACCENT_BG[dom.accentClass] || '#F0F0EC';
+      const tc  = ACCENT_TC[dom.accentClass] || '#2A2A27';
+      return `<div class="card mb-12">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.04em;color:var(--text-muted);margin-bottom:6px">${j.company}</div>
+        <div style="font-weight:500;margin-bottom:8px">${j.title}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="pill" style="background:${bg};color:${tc}">${dom.name||j.domain}</span>
+          <span class="pill pill-amber">${j.location}</span>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Testimonials
+    const testimonials = [
+      { quote: 'I joined the Cybersecurity community with zero background. Three months later I completed my first CTF and landed a summer internship.', name: 'Priya S.', role: 'Computer Engineering' },
+      { quote: 'The local opportunity section is what sets this apart. I built a real website for an actual Nashik client — something no classroom gives you.', name: 'Rahul K.', role: 'IT Engineering' },
+      { quote: 'Having a mentor who\'d been in my shoes changed everything. The structured path plus weekly check-ins kept me accountable and moving forward.', name: 'Sneha M.', role: 'AI & Data Science' },
+    ];
+    $('testimonials').innerHTML = testimonials.map(t => `
+      <div class="card">
+        <p style="font-size:14px;line-height:1.65;font-style:italic;color:var(--text-secondary);margin-bottom:20px">"${t.quote}"</p>
+        <div style="font-weight:600;font-size:13px">${t.name}</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:3px">${t.role}</div>
+      </div>`).join('');
+  });
+</script>
+</body>
+</html>
